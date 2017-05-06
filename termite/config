@@ -7,7 +7,7 @@ allow_bold = true
 dynamic_title = true
 urgent_on_bell = true
 clickable_url = true
-font = Source Code Pro for Powerline 13
+font = Hasklig 14
 scrollback_lines = 10000
 search_wrap = true
 #icon_name = terminal
@@ -32,24 +32,12 @@ filter_unmatched_urls = true
 #modify_other_keys = false
 
 [colors]
-# if unset, will reverse foreground and background
-highlight = #2f2f2f
-
-[colors]
-
 # special
 foreground      = #d8ddda
 foreground_bold = #d8ddda
-cursor          = #d8ddda
-background      = #232120
-
-[colors]
-
-# special
-foreground      = #d8ddda
-foreground_bold = #d8ddda
-cursor          = #cbbeba
-background      = #252120
+cursor          = #aaaaaa
+background      = #33302f
+highlight = #635e5b
 
 # black
 color0  = #0b0809

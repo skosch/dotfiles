@@ -7,50 +7,41 @@ Debian_menu = {}
 Debian_menu["Debian_Applications_Accessibility"] = {
 	{"Xmag","xmag"},
 }
-Debian_menu["Debian_Applications_Data_Management"] = {
-	{"pgAdmin III","/usr/bin/pgadmin3","/usr/share/pixmaps/pgadmin3.xpm"},
-}
 Debian_menu["Debian_Applications_Editors"] = {
+	{"GVIM","/usr/bin/vim.gnome -g -f","/usr/share/pixmaps/vim-32.xpm"},
 	{"LeafPad","/usr/bin/leafpad","/usr/share/pixmaps/leafpad.xpm"},
+	{"Nano", "x-terminal-emulator -e ".."/bin/nano","/usr/share/nano/nano-menu.xpm"},
 	{"Xedit","xedit"},
 	{"xpad","/usr/bin/xpad",},
 }
 Debian_menu["Debian_Applications_File_Management"] = {
+	{"PCManFM","/usr/bin/pcmanfm"},
 	{"Thunar","/usr/bin/thunar"},
 }
 Debian_menu["Debian_Applications_Graphics"] = {
-	{"FontForge","/usr/bin/fontforge","/usr/share/pixmaps/fontforge.xpm"},
-	{"gtk-recordmydesktop","/usr/bin/gtk-recordmydesktop","/usr/share/pixmaps/gtk-recordmydesktop.xpm"},
-	{"Inkscape","/usr/bin/inkscape","/usr/share/pixmaps/inkscape.xpm"},
 	{"mtPaint","/usr/bin/mtpaint"},
-	{"The GIMP","/usr/bin/gimp","/usr/share/pixmaps/gimp.xpm"},
 	{"X Window Snapshot","xwd | xwud"},
 }
 Debian_menu["Debian_Applications_Network_Communication"] = {
 	{"Pidgin","/usr/bin/pidgin","/usr/share/pixmaps/pidgin-menu.xpm"},
-	{"s-nail", "x-terminal-emulator -e ".."/usr/bin/s-nail"},
+	{"Sylpheed","/usr/bin/sylpheed","/usr/share/pixmaps/sylpheed-debian.xpm"},
 	{"Telnet", "x-terminal-emulator -e ".."/usr/bin/telnet.netkit"},
 	{"Xbiff","xbiff"},
 }
 Debian_menu["Debian_Applications_Network_File_Transfer"] = {
 	{"Transmission BitTorrent Client (GTK)","/usr/bin/transmission-gtk","/usr/share/pixmaps/transmission.xpm"},
 }
-Debian_menu["Debian_Applications_Network_Web_Browsing"] = {
-	{"Google Chrome","/opt/google/chrome/google-chrome","/opt/google/chrome/product_logo_32.xpm"},
-}
 Debian_menu["Debian_Applications_Network"] = {
 	{ "Communication", Debian_menu["Debian_Applications_Network_Communication"] },
 	{ "File Transfer", Debian_menu["Debian_Applications_Network_File_Transfer"] },
-	{ "Web Browsing", Debian_menu["Debian_Applications_Network_Web_Browsing"] },
 }
 Debian_menu["Debian_Applications_Office"] = {
 	{"AbiWord Word Processor","/usr/bin/abiword","/usr/share/pixmaps/abiword.xpm"},
+	{"gnumeric","/usr/bin/gnumeric","/usr/share/pixmaps/gnome-gnumeric.xpm"},
 }
 Debian_menu["Debian_Applications_Programming"] = {
-	{"GDB", "x-terminal-emulator -e ".."/usr/bin/gdb"},
-	{"MySQL Workbench","/usr/bin/mysql-workbench","/usr/share/pixmaps/mysql-workbench.xpm"},
-	{"Tclsh8.6", "x-terminal-emulator -e ".."/usr/bin/tclsh8.6"},
-	{"TkWish8.6","x-terminal-emulator -e /usr/bin/wish8.6"},
+	{"Python (v2.7)", "x-terminal-emulator -e ".."/usr/bin/python2.7","/usr/share/pixmaps/python2.7.xpm"},
+	{"Python (v3.4)", "x-terminal-emulator -e ".."/usr/bin/python3.4","/usr/share/pixmaps/python3.4.xpm"},
 }
 Debian_menu["Debian_Applications_Science_Mathematics"] = {
 	{"Bc", "x-terminal-emulator -e ".."/usr/bin/bc"},
@@ -63,23 +54,21 @@ Debian_menu["Debian_Applications_Science"] = {
 Debian_menu["Debian_Applications_Shells"] = {
 	{"Bash", "x-terminal-emulator -e ".."/bin/bash --login"},
 	{"Dash", "x-terminal-emulator -e ".."/bin/dash -i"},
-	{"fish", "x-terminal-emulator -e ".."/usr/bin/fish"},
 	{"Sh", "x-terminal-emulator -e ".."/bin/sh --login"},
 }
 Debian_menu["Debian_Applications_Sound"] = {
-	{"pavucontrol","/usr/bin/pavucontrol"},
+	{"Audacious","/usr/bin/audacious"},
 }
 Debian_menu["Debian_Applications_System_Administration"] = {
 	{"DSL/PPPoE configuration tool", "x-terminal-emulator -e ".."/usr/sbin/pppoeconf","/usr/share/pixmaps/pppoeconf.xpm"},
 	{"Editres","editres"},
-	{"GNOME partition editor","su-to-root -X -c /usr/sbin/gparted","/usr/share/pixmaps/gparted.xpm"},
+	{"LXAppearance","/usr/bin/lxappearance"},
 	{"Network Admin","/usr/bin/network-admin","/usr/share/gnome-system-tools/pixmaps/network.xpm"},
 	{"Openbox Configuration Manager","/usr/bin/obconf","/usr/share/pixmaps/obconf.xpm"},
 	{"pppconfig", "x-terminal-emulator -e ".."su-to-root -p root -c /usr/sbin/pppconfig"},
 	{"Services Admin","/usr/bin/services-admin","/usr/share/gnome-system-tools/pixmaps/services.xpm"},
 	{"Shares Admin","/usr/bin/shares-admin","/usr/share/gnome-system-tools/pixmaps/shares.xpm"},
 	{"System Information","/usr/bin/hardinfo","/usr/share/pixmaps/hardinfo.xpm"},
-	{"TeXconfig", "x-terminal-emulator -e ".."/usr/bin/texconfig"},
 	{"Time Admin","/usr/bin/time-admin","/usr/share/gnome-system-tools/pixmaps/time.xpm"},
 	{"User accounts Admin","/usr/bin/users-admin","/usr/share/gnome-system-tools/pixmaps/users.xpm"},
 	{"Xclipboard","xclipboard"},
@@ -88,12 +77,14 @@ Debian_menu["Debian_Applications_System_Administration"] = {
 	{"Xrefresh","xrefresh"},
 }
 Debian_menu["Debian_Applications_System_Hardware"] = {
+	{"LXRandR","/usr/bin/lxrandr"},
 	{"Xvidtune","xvidtune"},
 }
 Debian_menu["Debian_Applications_System_Language_Environment"] = {
 	{"Input Method Configuration", "x-terminal-emulator -e ".."/usr/bin/im-config"},
 }
 Debian_menu["Debian_Applications_System_Monitoring"] = {
+	{"LXTask","/usr/bin/lxtask"},
 	{"Pstree", "x-terminal-emulator -e ".."/usr/bin/pstree.x11","/usr/share/pixmaps/pstree16.xpm"},
 	{"Top", "x-terminal-emulator -e ".."/usr/bin/top"},
 	{"Xconsole","xconsole -file /dev/xconsole"},
@@ -120,20 +111,16 @@ Debian_menu["Debian_Applications_Terminal_Emulators"] = {
 	{"X-Terminal as root (GKsu)","/usr/bin/gksu -u root /usr/bin/x-terminal-emulator","/usr/share/pixmaps/gksu-debian.xpm"},
 	{"XTerm (Unicode)","uxterm","/usr/share/pixmaps/xterm-color_32x32.xpm"},
 }
-Debian_menu["Debian_Applications_Text"] = {
-	{"Fortune","sh -c 'while /usr/games/fortune | col -x | xmessage -center -buttons OK:1,Another:0 -default OK -file - ; do :; done'"},
-}
 Debian_menu["Debian_Applications_Video"] = {
 	{"GNOME MPlayer","gnome-mplayer","/usr/share/pixmaps/gnome-mplayer.xpm"},
 	{"guvcview","/usr/bin/guvcview"},
 }
 Debian_menu["Debian_Applications_Viewers"] = {
+	{"Evince","/usr/bin/evince","/usr/share/pixmaps/evince.xpm"},
 	{"Xditview","xditview"},
-	{"XDvi","/usr/bin/xdvi"},
 }
 Debian_menu["Debian_Applications"] = {
 	{ "Accessibility", Debian_menu["Debian_Applications_Accessibility"] },
-	{ "Data Management", Debian_menu["Debian_Applications_Data_Management"] },
 	{ "Editors", Debian_menu["Debian_Applications_Editors"] },
 	{ "File Management", Debian_menu["Debian_Applications_File_Management"] },
 	{ "Graphics", Debian_menu["Debian_Applications_Graphics"] },
@@ -145,7 +132,6 @@ Debian_menu["Debian_Applications"] = {
 	{ "Sound", Debian_menu["Debian_Applications_Sound"] },
 	{ "System", Debian_menu["Debian_Applications_System"] },
 	{ "Terminal Emulators", Debian_menu["Debian_Applications_Terminal_Emulators"] },
-	{ "Text", Debian_menu["Debian_Applications_Text"] },
 	{ "Video", Debian_menu["Debian_Applications_Video"] },
 	{ "Viewers", Debian_menu["Debian_Applications_Viewers"] },
 }
@@ -161,7 +147,6 @@ Debian_menu["Debian_Games"] = {
 }
 Debian_menu["Debian_Help"] = {
 	{"Info", "x-terminal-emulator -e ".."info"},
-	{"TeXdoctk","/usr/bin/texdoctk"},
 	{"Xman","xman"},
 }
 Debian_menu["Debian"] = {
