@@ -59,12 +59,12 @@ run_once({ "urxvtd", "unclutter -root" })
 
 -- {{{ Variable definitions
 local chosen_theme = "multicolor"
-local modkey       = "Mod4"
-local altkey       = "Mod1"
+local modkey       = "Mod4" -- Alt/Option key on mac keyboard
+local altkey       = "Mod1" -- Command key on mac keyboard
 local terminal     = "termite" or "xterm"
 local editor       = os.getenv("EDITOR") or "nano" or "vi"
-local gui_editor   = "gvim"
-local browser      = "google-chrome"
+local gui_editor   = "termite -e nvim"
+local browser      = "firefox-trunk"
 local mail         = "thunderbird"
 
 awful.util.terminal = terminal
@@ -182,10 +182,11 @@ awful.util.mymainmenu = freedesktop.menu.build({
 })
 awful.util.mymainmenu = awful.menu.new({ items = {
   { "&Chrome", "google-chrome", "/usr/share/icons/Faenza/apps/scalable/google-chrome.svg"},
-  { "&Firefox", "firefox", "/usr/share/icons/Faenza/apps/scalable/firefox.svg"},
+  { "&Firefox", "firefox-trunk", "/usr/share/icons/Faenza/apps/scalable/firefox.svg"},
   { "Thunderbird &Mail", "thunderbird", "/usr/share/icons/Faenza/apps/scalable/thunderbird.svg"},
   { "&Atom", "atom", "/usr/share/icons/Faenza/apps/scalable/atom.svg"},
-  { "&Vim", "gvim", "/usr/share/icons/Faenza/apps/scalable/gvim.svg"},
+  { "&Emacs", "emacs", "/usr/share/icons/Faenza/apps/scalable/emacs.svg"},
+  { "&Vim", "termite -e nvim", "/usr/share/icons/Faenza/apps/scalable/gvim.svg"},
   { "&Thunar", "thunar", "/usr/share/icons/Faenza/apps/scalable/kfm.svg"},
   { "", nil },
   { "&Power", { {"&Shutdown", "/sbin/poweroff"}, {"&Reboot", "/sbin/reboot"}, {"&Logout", awesome.quit} }},
@@ -224,24 +225,7 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Take a screenshot
     -- https://github.com/copycat-killer/dots/blob/master/bin/screenshot
-    awful.key({ altkey }, "p", function() os.execute("screenshot") end),
-
-    -- Hotkeys
-    awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
-              {description="show help", group="awesome"}),
-    -- Tag browsing
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
-    awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
-              {description = "go back", group = "tag"}),
-
-    -- Non-empty tag browsing
-    awful.key({ altkey }, "Left", function () lain.util.tag_view_nonempty(-1) end,
-              {description = "view  previous nonempty", group = "tag"}),
-    awful.key({ altkey }, "Right", function () lain.util.tag_view_nonempty(1) end,
-              {description = "view  previous nonempty", group = "tag"}),
+   awful.key({ modkey }, "p", function() os.execute("gnome-screenshot -i") end),
 
     -- Default client focus
     awful.key({ altkey,           }, "j",
@@ -290,16 +274,6 @@ globalkeys = awful.util.table.join(
               {description = "focus the next screen", group = "screen"}),
     awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_relative(-1) end,
               {description = "focus the previous screen", group = "screen"}),
-    awful.key({ modkey,           }, "u", awful.client.urgent.jumpto,
-              {description = "jump to urgent client", group = "client"}),
-    awful.key({ modkey,           }, "Tab",
-        function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
-        end,
-        {description = "go back", group = "client"}),
 
     -- Show/Hide Wibox
     awful.key({ modkey }, "b", function ()
@@ -310,10 +284,6 @@ globalkeys = awful.util.table.join(
             end
         end
     end),
-
-    -- On the fly useless gaps change
-    awful.key({ altkey, "Control" }, "+", function () lain.util.useless_gaps_resize(1) end),
-    awful.key({ altkey, "Control" }, "-", function () lain.util.useless_gaps_resize(-1) end),
 
     -- Dynamic tagging
     awful.key({ modkey, "Shift" }, "n", function () lain.util.add_tag() end),
@@ -394,73 +364,13 @@ globalkeys = awful.util.table.join(
 						beautiful.volume.update()
 				end),
 
-    -- MPD control
-    awful.key({ altkey, "Control" }, "Up",
-        function ()
-            awful.spawn.with_shell("mpc toggle")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Down",
-        function ()
-            awful.spawn.with_shell("mpc stop")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Left",
-        function ()
-            awful.spawn.with_shell("mpc prev")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey, "Control" }, "Right",
-        function ()
-            awful.spawn.with_shell("mpc next")
-            beautiful.mpd.update()
-        end),
-    awful.key({ altkey }, "0",
-        function ()
-            local common = { text = "MPD widget ", position = "top_middle", timeout = 2 }
-            if beautiful.mpd.timer.started then
-                beautiful.mpd.timer:stop()
-                common.text = common.text .. lain.util.markup.bold("OFF")
-            else
-                beautiful.mpd.timer:start()
-                common.text = common.text .. lain.util.markup.bold("ON")
-            end
-            naughty.notify(common)
-        end),
-
-    -- Copy clipboard to primary (gtk to terminals)
-    awful.key({ modkey }, "v", function () awful.spawn("xsel -b | xsel") end),
-
-    -- User programs
-    awful.key({ modkey }, "e", function () awful.spawn(gui_editor) end),
-    awful.key({ modkey }, "q", function () awful.spawn(browser) end),
-
-    -- Default
-    --[[ Menubar
-    awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
-    --]]
-    --[[ dmenu
-    awful.key({ modkey }, "x", function ()
-        awful.spawn(string.format("dmenu_run -i -fn 'Monospace' -nb '%s' -nf '%s' -sb '%s' -sf '%s'",
-        beautiful.bg_normal, beautiful.fg_normal, beautiful.bg_focus, beautiful.fg_focus))
-		end)
-    --]]
     -- Prompt
-    awful.key({ modkey }, "r", function () awful.screen.focused().mypromptbox:run() end,
-              {description = "run prompt", group = "launcher"}),
+    awful.key({ modkey }, "r",
+        function ()
+          awful.screen.focused().mypromptbox:run()
+        end,
+        {description = "run prompt", group = "launcher"})
 
-    awful.key({ modkey }, "x",
-              function ()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().mypromptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
-    --]]
 )
 
 clientkeys = awful.util.table.join(
@@ -499,7 +409,7 @@ clientkeys = awful.util.table.join(
 -- Bind all key numbers to tags.
 -- Be careful: we use keycodes to make it works on any keyboard layout.
 -- This should map on the top row of your keyboard, usually 1 to 9.
-for i = 1, 9 do
+for i = 1, 7 do
     globalkeys = awful.util.table.join(globalkeys,
         -- View tag only.
         awful.key({ }, "F" .. i,
